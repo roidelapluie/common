@@ -24,6 +24,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"os"
 	"strings"
 	"sync"
 	"time"
@@ -238,7 +239,7 @@ func NewRoundTripperFromConfig(cfg HTTPClientConfig, name string, disableKeepAli
 				conntrack.DialWithName(name),
 			),
 		}
-		if enableHTTP2 {
+		if enableHTTP2 || os.Getenv("PROMETHEUS_COMMON_ENABLE_HTTP2") != "" {
 			// HTTP/2 support is golang has many problematic cornercases where
 			// dead connections would be kept and used in connection pools.
 			// https://github.com/golang/go/issues/32388
