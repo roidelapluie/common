@@ -11,19 +11,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//go:build noaws
-// +build noaws
+//go:build nosigv4
+// +build nosigv4
 
 package sigv4
 
 import (
-	"errors"
 	"net/http"
 )
 
 // NewSigV4RoundTripper returns an error when a new RoundTripper is created.
 func NewSigV4RoundTripper(cfg *SigV4Config, next http.RoundTripper) (http.RoundTripper, error) {
-	return nil, errors.New("sigv4 support has been disabled in this build")
+	return nil, ErrSigV4Disabled
 }
 
 // SigV4Config is the configuration for signing remote write requests with
@@ -32,7 +31,7 @@ type SigV4Config struct {
 }
 
 func (c *SigV4Config) Validate() error {
-	return errors.New("sigv4 support has been disabled in this build")
+	return ErrSigV4Disabled
 }
 
 func (c *SigV4Config) UnmarshalYAML(unmarshal func(interface{}) error) error {

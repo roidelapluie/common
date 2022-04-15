@@ -11,8 +11,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//go:build !noaws
-// +build !noaws
+//go:build !nosigv4
+// +build !nosigv4
 
 package sigv4
 
